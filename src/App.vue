@@ -30,6 +30,7 @@ export default {
 }
 </script>
 
-<style>
+<style >
 @import './assets/scss/reset.scss';
+
 </style>

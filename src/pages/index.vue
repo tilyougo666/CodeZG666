@@ -2,6 +2,44 @@
     <div class="index">
         <div class="container">
             <div class="swiperBox">
+                <div class="nav-menu">
+                    <ul class="menu-wrap">
+                        <li class="menu-item">
+                        <a href="javascript:;">手机 电话卡</a>
+                        <div class="children">
+                            <ul v-for="(item,i) in menuList" :key="i">
+                               <li v-for="(sub,j) in item" :key="j">
+                                   <a v-bind:href="'/#/product'+sub.id">
+                                       <img v-bind:src="sub.img" alt="">
+                                       {{sub.name}}
+                                   </a>
+                               </li>
+                            </ul>
+                        </div>
+                        </li>
+                        <li class="menu-item">
+                        <a href="javascript:;">电视 盒子</a>
+                        </li>
+                        <li class="menu-item">
+                        <a href="javascript:;">笔记本 平板</a>
+                        </li>
+                        <li class="menu-item">
+                        <a href="javascript:;">家电 插线板</a>
+                        </li>
+                        <li class="menu-item">
+                        <a href="javascript:;">出行 穿戴</a>
+                        </li>
+                        <li class="menu-item">
+                        <a href="javascript:;">智能 路由器</a>
+                        </li>
+                        <li class="menu-item">
+                        <a href="javascript:;">电源 配件</a>
+                        </li>
+                        <li class="menu-item">
+                        <a href="javascript:;">生活 箱包</a>
+                        </li>
+                    </ul>
+                </div>
                 <swiper v-bind:options="swiperOption">
                     <swiperSlide v-for="(item,index) in slideList" :key="index">
                         <a v-bind:href="'/#/product'+item.id"><img v-bind:src="item.img" alt=""></a>
@@ -12,15 +50,52 @@
                     <div class="swiper-button-next" slot="button-next"></div>
                 </swiper>
             </div>
-            <div class="ads-box"></div>
-            <div class="banner"></div>
-            <div class="product-box"></div>
+            <div class="ads-box">
+                <a v-bind:href="'/#/product/'+item.id" v-for="(item,index) in adsList" :key="index">
+                    <img v-bind:src="item.img" alt="">
+                </a>
+            </div>
+            <div class="banner">
+                <a href="/#/product/30">
+                    <img src="/imgs/banner-1.png" alt="">
+                </a>
+            </div>
+            <div class="product-box">
+                <h2>手机</h2>
+                <div class="wrapper">
+                    <div class="banner-left">
+                        <a href="/#/product/35"><img src="/imgs/mix-alpha.jpg" alt=""></a>
+                    </div>
+                    <div class="list-box">
+                        <div class="list" v-for="(arr,i) in phoneList" v-bind:key="i">
+                            <div class="item" v-for="(item,j) in arr" :key="j">
+                                <span>新品</span>
+                                <div class="item-img">
+                                    <img src="/imgs/nav-img/nav-1.png" alt="">
+                                </div>
+                                <div class="item-info">
+                                    <h3>小米9</h3>
+                                     <p>zhanggong666</p>
+                                     <p class="price">2999元</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <service-bar></service-bar>
+        <modal title="提示" sureText="查看购物车" btnType="1" modalType="middle" v-bind:showModal="true">
+            <template v-slot:body>
+                <p>商品添加成功</p>
+            </template>
+
+        </modal>
     </div>
 </template>
 <script>
 import ServiceBar from '../components/ServiceBar.vue'
+import Modal from '../components/Modal.vue'
 import { swiper,swiperSlide} from 'vue-awesome-swiper'
 import 'swiper/dist/css/swiper.css'
 export default {
@@ -28,7 +103,8 @@ export default {
     components:{
         swiper,
         swiperSlide,
-        ServiceBar
+        ServiceBar,
+        Modal
     },
     data() {
         return{
@@ -72,22 +148,310 @@ export default {
                     id:'',
                     img:'/imgs/slider/slide-5.jpg'
                 },
-            ]
+            ],
+            menuList:[
+                [
+                    {
+                        id:30,
+                        img:'/imgs/item-box-1.png',
+                        name:"小米CC9",
+                    },{
+                        id:31,
+                        img:'/imgs/item-box-2.png',
+                        name:"小米青春版",
+                    },{
+                        id:32,
+                        img:'/imgs/item-box-3.jpg',
+                        name:"ReadMEP20",
+                    },{
+                        id:33,
+                        img:'/imgs/item-box-4.jpg',
+                        name:"4G专区",
+                    },
+                ],[ {
+                        id:30,
+                        img:'/imgs/item-box-1.png',
+                        name:"小米CC9",
+                    },{
+                        id:31,
+                        img:'/imgs/item-box-2.png',
+                        name:"小米青春版",
+                    },{
+                        id:32,
+                        img:'/imgs/item-box-3.jpg',
+                        name:"ReadMEP20",
+                    },{
+                        id:33,
+                        img:'/imgs/item-box-4.jpg',
+                        name:"4G专区",
+                    },],[ {
+                        id:30,
+                        img:'/imgs/item-box-1.png',
+                        name:"小米CC9",
+                    },{
+                        id:31,
+                        img:'/imgs/item-box-2.png',
+                        name:"小米青春版",
+                    },{
+                        id:32,
+                        img:'/imgs/item-box-3.jpg',
+                        name:"ReadMEP20",
+                    },{
+                        id:33,
+                        img:'/imgs/item-box-4.jpg',
+                        name:"4G专区",
+                    },],
+                    [ {
+                        id:30,
+                        img:'/imgs/item-box-1.png',
+                        name:"小米CC9",
+                    },{
+                        id:31,
+                        img:'/imgs/item-box-2.png',
+                        name:"小米青春版",
+                    },{
+                        id:32,
+                        img:'/imgs/item-box-3.jpg',
+                        name:"ReadMEP20",
+                    },{
+                        id:33,
+                        img:'/imgs/item-box-4.jpg',
+                        name:"4G专区",
+                    },],
+                    [ {
+                        id:30,
+                        img:'/imgs/item-box-1.png',
+                        name:"小米CC9",
+                    },{
+                        id:31,
+                        img:'/imgs/item-box-2.png',
+                        name:"小米青春版",
+                    },{
+                        id:32,
+                        img:'/imgs/item-box-3.jpg',
+                        name:"ReadMEP20",
+                    },{
+                        id:33,
+                        img:'/imgs/item-box-4.jpg',
+                        name:"4G专区",
+                    },],
+                    [ {
+                        id:30,
+                        img:'/imgs/item-box-1.png',
+                        name:"小米CC9",
+                    },{
+                        id:31,
+                        img:'/imgs/item-box-2.png',
+                        name:"小米青春版",
+                    },{
+                        id:32,
+                        img:'/imgs/item-box-3.jpg',
+                        name:"ReadMEP20",
+                    },{
+                        id:33,
+                        img:'/imgs/item-box-4.jpg',
+                        name:"4G专区",
+                    },]
+            ],
+            adsList:[
+                {
+                    id:33,
+                    img:'/imgs/ads/ads-1.png'
+                },
+                {
+                    id:48,
+                    img:'/imgs/ads/ads-2.jpg'
+                },
+                {
+                    id:45,
+                    img:'/imgs/ads/ads-3.png'
+                },
+                {
+                    id:47,
+                    img:'/imgs/ads/ads-4.jpg'
+                },
+            ],
+            phoneList:[[1,1,1,1],[1,1,1,1]]
         }
     }
 }
 </script>
 <style lang="scss">
+@import './../assets/scss/config.scss';
+@import './../assets/scss/mixin.scss';
 .index{
     .container{
       .swiperBox{
+          .nav-menu{
+              position: absolute;
+              height: 451px;
+              width: 264px;
+              z-index: 9;
+              padding: 26px 0;
+              background-color: #55585a7a;
+              box-sizing: border-box;
+              .menu-wrap{
+                  .menu-item{
+                      height: 50px;
+                      line-height: 50px;
+                      a{
+                          display: block;
+                          position: relative;
+                          color: #ffffff;
+                          font-size: 16px;
+                          padding-left: 30px;
+                          &:after{
+                              position: absolute;
+                              right: 30px;
+                              height: 17.5px;
+                              content: ' ';
+                              @include bgImg(10px,15px,'/imgs/icon-arrow.png');
+                              padding-top: 30px;
+                          }
+                      }
+                      &:hover{
+                          background-color: $colorA;
+                          .children{
+                              display: block;
+                          }
+                      }
+                      .children{
+                          display: none;
+                          width: 962px;
+                          height: 451px;
+                          background-color: $colorG;
+                          position: absolute;
+                          top: 0;
+                          left: 264px;
+                          border: 1px solid #E5E5E5;
+                          ul{
+                              display: flex;
+                              height: 75px;
+                              justify-content: space-between;
+                              li{
+                                  height: 75px;
+                                  line-height: 75px;
+                                  flex: 1;
+                              }
+                              a{
+                                  color: $colorB;
+                                  font-size: 14px;
+                              }
+                              img{
+                                  width: 42px;
+                                  height: 35px;
+                                  vertical-align: middle;
+                                  margin-right: 15px;
+                              }
+                          }
+                      }
+                  }
+              }
+          }
          .swiper-container{
-             height: 100x;
+             height: 451px;
+             .swiper-button-prev{
+                 left: 274px;
+             }
              img{
                  width: 100%;
                  height: 100%;
              }
          }
+      }
+      .ads-box{
+          @include flex();
+          margin-top: 14px;
+          margin-bottom: 31px;
+          a{
+              width: 296px;
+              height: 167px;
+          }
+      }
+      .banner{
+          margin-bottom: 50px;
+      }
+      .product-box{
+        //   background-color: $colorJ;
+          padding: 30px 0 50px;
+          h2{
+              font-size: 22px;
+              height: 21px;
+              line-height: 21px;
+              color: $colorB;
+              margin-bottom: 20px;
+          }
+          .wrapper{
+              display: flex;
+              .banner-left{
+                  margin-right: 16px;
+                  img{
+                      height: 619px;
+                      width: 224px;
+                  }
+              }
+              .list-box{
+                  .list{
+                      @include flex();
+                      width: 986px;
+                      margin-bottom: 14px;
+                      &:last-child{
+                          margin-bottom: 0;
+                      }
+                      .item{
+                          width: 236px;
+                          height: 302px;
+                          background-color: $colorG;
+                          text-align: center;
+                          span{
+                              display: inline-block;
+                              width: 67px;
+                              height: 24px;
+                              background-color: #7ecf68;
+                              line-height: 24px;
+                              color: $colorG;
+                            //   &.new-pro{
+                            //       background-color: #7ecf68;
+                            //   }
+                            //   &.kill-pro{
+                            //       background-color: #E82626;
+                            //   }
+                          }
+                          .item-img{
+                              img{
+                                  width: 100%;
+                                  height: 195px;
+                              }
+                          }
+                          .item-info{
+                              h3{
+                                  font-size: $fontJ;
+                                  color: $colorB;
+                                  line-height: $fontJ;
+                                  font-weight: bold;
+                              }
+                              p{
+                                  color: $colorD;
+                                  line-height: 13px;
+                                  margin: 6px auto 13px;
+                              }
+                              .price{
+                                  color: #f20A0A;
+                                  font-size: $fontJ;
+                                  font-weight: bold;
+                                  cursor: pointer;
+                                  &:after{
+                                      @include bgImg(22px,22px,'/imgs/icon-cart-hover.png');
+                                      content: ' ';
+                                      margin-left: 5px;
+                                      vertical-align: middle;
+                                  }
+                              }
+                          }
+                      }
+                  }
+              }
+          }
       }
     }
 }

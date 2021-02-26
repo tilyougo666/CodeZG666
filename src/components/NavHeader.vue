@@ -252,6 +252,8 @@ export default {
                             line-height: 12px;
                             height: 220px;
                             text-align: center;
+                            background-color: #ffffff;//个人添加
+                            z-index: 10;//个人添加
                             a{
                                 display: inline-block;
                             }
